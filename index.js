@@ -1,8 +1,10 @@
+require('dotenv').config();
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const gameState = require('./gamestate.js');
 const rollFunctions = require('./deathroll.js');
+
 
 const prefix = '!';
 
@@ -72,4 +74,4 @@ client.on('message', message => {
 });
 
 
-client.login('ODM1OTg3NDE5MzgzMzMyODg0.YIXb9A.LeYngl_jTJIJKYWaRr32HRHmC3E')
+client.login(process.env.TOKEN)
