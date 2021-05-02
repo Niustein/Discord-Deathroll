@@ -12,12 +12,15 @@ function join(username) {
     console.log(username, playerList)
     if (!(playerList.includes(username))) {
         playerList.push(username);
+        return true;
     } else {
-        return
+        return false;
     }
 };
-function updateRoll() {
-
+function updateRoll(username, rolledValue) {
+    gameState.expectedRoll = rolledValue
+    gameState.lastRoller = username;
+    gameState.rollCount += 1;
 };
 
 function resetVariables() {

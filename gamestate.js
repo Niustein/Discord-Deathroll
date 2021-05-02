@@ -3,5 +3,6 @@ module.exports = {
     playerList: [],
     expectedRoll: 69420,
     lastRoller: '',
-    rollCount: 1
+    rollCount: 1,
+    rolledValue: 69420
 }
