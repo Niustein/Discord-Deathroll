@@ -44,7 +44,7 @@ client.on('message', message => {
         command.execute(message, args);
     } catch (error) {
         console.error(error);
-        message.replay('There was an error tryign to execute that command');
+        message.replay('There was an error trying to execute that command');
     }
 
 });
