@@ -18,7 +18,7 @@ module.exports = {
         };
 
         if (playerList.length === 2) {
-            message.channel.send(`The deathroll between ${playerList[0]} and ${playerList[1]} will start, either player start the battle by typing "!roll 69420"`)
+            message.channel.send(`The deathroll between ${playerList[0]} and ${playerList[1]} will start, either player start the battle by typing "!roll ${gameState.expectedRoll}"`)
         }
     }
 }

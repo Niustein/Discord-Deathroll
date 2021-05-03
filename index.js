@@ -24,25 +24,28 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    // if (!client.commands.has(command)) return;
+    if (!client.commands.has(command)) return;
 
     // const command = client.commands.get(commandName);
 
-    // try{
-    //     client.commands.get(command).execute(message,args);
+    try {
+        client.commands.get(command).execute(message, args);
+    } catch (error) {
+        console.error(error);
+        message.replay('There was an error tryign to execute that command');
+    }
+
+    // if (command === 'rollstart') {
+    //     client.commands.get('rollstart').execute(message, args);
     // }
 
-    if (command === 'rollstart') {
-        client.commands.get('rollstart').execute(message, args);
-    }
+    // if (command === 'join') {
+    //     client.commands.get('join').execute(message, args);
+    // }
 
-    if (command === 'join') {
-        client.commands.get('join').execute(message, args);
-    }
-
-    if (command === 'roll') {
-        client.commands.get('roll').execute(message, args);
-    }
+    // if (command === 'roll') {
+    //     client.commands.get('roll').execute(message, args);
+    // }
 });
 
 client.login(process.env.TOKEN)
