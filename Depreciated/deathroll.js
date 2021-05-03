@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 // const client = new Discord.Client();
 
-const gameState = require('./gamestate.js');
+const gameState = require('../gamestate.js');
 
-let client = require('./index.js');
+let client = require('../index.js');
 
 function test() {
 

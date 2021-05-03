@@ -1,7 +1,8 @@
-const gameState = require('../gamestate.js');
+const gameState = require('../../gamestate.js');
 
 module.exports = {
     name: 'join',
+    aliases: ['j'],
     description: 'joins a started deathroll',
 
     execute(message, args) {

@@ -4,15 +4,25 @@ const client = new Discord.Client();
 const fs = require('fs');
 
 const prefix = '!';
-const gameState = require('./gamestate.js');
 
 // command handler
+// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+// for (const file of commandFiles) {
+//     const command = require(`./commands/${file}`);
+//     client.commands.set(command.name, command);
+// };
+
+// folder handler
 client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
-};
+const commandFolders = fs.readdirSync('./commands');
+
+for (const folder of commandFolders) {
+    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const command = require(`./commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
+}
 
 client.once('ready', () => {
     console.log('online!');
@@ -22,30 +32,21 @@ client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
 
-    if (!client.commands.has(command)) return;
+    const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-    // const command = client.commands.get(commandName);
+
+    if (!command) return;
 
     try {
-        client.commands.get(command).execute(message, args);
+        command.execute(message, args);
     } catch (error) {
         console.error(error);
         message.replay('There was an error tryign to execute that command');
     }
 
-    // if (command === 'rollstart') {
-    //     client.commands.get('rollstart').execute(message, args);
-    // }
-
-    // if (command === 'join') {
-    //     client.commands.get('join').execute(message, args);
-    // }
-
-    // if (command === 'roll') {
-    //     client.commands.get('roll').execute(message, args);
-    // }
 });
 
 client.login(process.env.TOKEN)
