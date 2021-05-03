@@ -5,8 +5,9 @@ module.exports = {
     description: 'joins a started deathroll',
 
     execute(message, args) {
+        if (!gameState.inProgress || gameState.playerList.length === 2) return;
+
         let playerList = gameState.playerList;
-        console.log(playerList);
 
         if (!(playerList.includes(message.member.user.username))) {
             playerList.push(message.member.user.username);

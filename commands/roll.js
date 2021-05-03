@@ -5,6 +5,11 @@ module.exports = {
     description: 'rolls in the deathroll',
 
     execute(message, args) {
+        if (!gameState.inProgress
+            || !gameState.playerList.includes(message.member.user.username)
+            || gameState.playerList.length != 2) return;
+
+
         if (args[0] != gameState.expectedRoll) {
             message.channel.send(`Please roll the correct number, ${gameState.expectedRoll}`)
             return

@@ -5,6 +5,7 @@ module.exports = {
     description: 'Starts a deathroll',
 
     execute(message, args) {
+        if (gameState.inProgress) return;
         gameState.inProgress = true;
         message.channel.send('type !join to join the deathroll');
     }
