@@ -1,8 +1,13 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+// const client = new Discord.Client();
 
 const gameState = require('./gamestate.js');
 
+let client = require('./index.js');
+
+function test() {
+
+}
 function rollstart() {
     gameState.inProgress = true;
 };
@@ -17,6 +22,7 @@ function join(username) {
         return false;
     }
 };
+
 function updateRoll(username, rolledValue) {
     gameState.expectedRoll = rolledValue
     gameState.lastRoller = username;
@@ -32,5 +38,5 @@ function resetVariables() {
 }
 
 module.exports = {
-    rollstart, join, updateRoll, resetVariables
+    test, rollstart, join, updateRoll, resetVariables
 }
